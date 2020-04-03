@@ -262,9 +262,9 @@ public class RancherBuilder extends AbstractRancherBuilder {
         }
 
         public FormValidation doCheckPorts(@QueryParameter String value) {
-            if (Strings.isNullOrEmpty(value)) {
+//            if (Strings.isNullOrEmpty(value)) {
                 return FormValidation.ok();
-            }
+/*            }
 
             String[] ports = value.split(",");
             boolean inValid = Arrays.asList(ports)
@@ -273,7 +273,7 @@ public class RancherBuilder extends AbstractRancherBuilder {
                             port -> Arrays.asList(port.split(":"))
                                     .stream()
                                     .anyMatch(part -> !StringUtils.isNumeric(part)));
-            return inValid ? FormValidation.error("Ports config should be like: 8080:8080,8181:8181") : FormValidation.ok();
+            return inValid ? FormValidation.error("Ports config should be like: 8080:8080,8181:8181") : FormValidation.ok();*/
         }
 
         public FormValidation doCheckCredentialId(@QueryParameter String value) {
