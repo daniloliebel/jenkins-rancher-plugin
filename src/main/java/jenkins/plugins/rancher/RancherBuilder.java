@@ -104,21 +104,38 @@ public class RancherBuilder extends AbstractRancherBuilder {
     }
 
     private void upgradeService(Service service, String dockerUUID, TaskListener listener, Map<String, Object> environments) throws IOException {
+        List<String> portas = new ArrayList<String>();
         listener.getLogger().println("Upgrading service instance");
         checkServiceState(service, listener);
         ServiceUpgrade serviceUpgrade = new ServiceUpgrade();
         InServiceStrategy inServiceStrategy = new InServiceStrategy();
 
         LaunchConfig launchConfig = service.getLaunchConfig();
+        listener.getLogger().println("Inserindo portas (ports)");
+        listener.getLogger().println(ports);
+        if (!Strings.isNullOrEmpty(ports)) {
+            portas.addAll(Arrays.asList(ports.split(",")));
+            listener.getLogger().println(portas.toString());
+        }       
+        listener.getLogger().println("Inserindo portas (launchConfig)");
+        if (!service.getLaunchConfig().getPorts().isEmpty()) {
+           portas.addAll(service.getLaunchConfig().getPorts());
+           listener.getLogger().println(service.getLaunchConfig().getPorts().toString());
+        }
+        //launchConfig.setPorts(service.getLaunchConfig().getPorts()); 
+        if (!portas.isEmpty()){
+            listener.getLogger().println(portas.toString());
+        }
         launchConfig.setImageUuid(dockerUUID);
         launchConfig.getEnvironment().putAll(environments);
+
         listener.getLogger().println(dataVolumes.toString());
         if (!Strings.isNullOrEmpty(dataVolumes)) {
             launchConfig.setDataVolumes(Arrays.asList(dataVolumes.split(",")));
         }
 
-        if (!Strings.isNullOrEmpty(ports)) {
-            launchConfig.setPorts(Arrays.asList(ports.split(",")));
+        if (!portas.isEmpty()) {
+            launchConfig.setPorts(portas);
         }
 
         if (startFirst && launchConfig.getPorts().isEmpty() ) {

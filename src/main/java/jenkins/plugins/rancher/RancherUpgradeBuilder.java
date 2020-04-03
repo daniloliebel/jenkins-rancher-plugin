@@ -46,14 +46,14 @@ public class RancherUpgradeBuilder extends AbstractRancherBuilder {
 
     @DataBoundConstructor
     public RancherUpgradeBuilder(
-            String environmentId, String endpoint, String credentialId, String service, String finishAction, int timeout, String dataVolumes) {
+            String environmentId, String endpoint, String credentialId, String service, String finishAction, int timeout, String dataVolumes, String ports) {
         super(environmentId, endpoint, credentialId, service, timeout);
         this.finishAction = finishAction;
     }
 
     protected static RancherUpgradeBuilder newInstance(String environmentId, String endpoint, String credentialId, String service,
-                                                       String finishAction, int timeout, String dataVolumes, RancherClient rancherClient, CredentialsUtil credentialsUtil) {
-        RancherUpgradeBuilder rancherBuilder = new RancherUpgradeBuilder(environmentId, endpoint, credentialId, service,finishAction, timeout, dataVolumes);
+                                                       String finishAction, int timeout, String dataVolumes, String ports, RancherClient rancherClient, CredentialsUtil credentialsUtil) {
+        RancherUpgradeBuilder rancherBuilder = new RancherUpgradeBuilder(environmentId, endpoint, credentialId, service,finishAction, timeout, dataVolumes, ports);
         rancherBuilder.setCredentialsUtil(credentialsUtil);
         rancherBuilder.setRancherClient(rancherClient);
         return rancherBuilder;
