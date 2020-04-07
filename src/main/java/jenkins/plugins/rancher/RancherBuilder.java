@@ -115,6 +115,9 @@ public class RancherBuilder extends AbstractRancherBuilder {
         listener.getLogger().println(ports);
         if (!Strings.isNullOrEmpty(ports)) {
             portas.addAll(Arrays.asList(ports.split(",")));
+            if (!service.getLaunchConfig().getPorts().isEmpty()){
+                portas.removeAll(service.getLaunchConfig().getPorts());
+            }
             listener.getLogger().println(portas.toString());
         }       
         listener.getLogger().println("Inserindo portas (launchConfig)");
@@ -174,10 +177,10 @@ public class RancherBuilder extends AbstractRancherBuilder {
         LaunchConfig launchConfig = new LaunchConfig();
         launchConfig.setImageUuid(dockerUUID);
         launchConfig.setEnvironment(environments);
-        if (!Strings.isNullOrEmpty(ports)) {
+        if (!ports.isEmpty()) {
             launchConfig.setPorts(Arrays.asList(ports.split(",")));
         }
-        listener.getLogger().println(dataVolumes.toString());
+        //listener.getLogger().println(dataVolumes.toString());
         if (!Strings.isNullOrEmpty(dataVolumes)) {
             launchConfig.setDataVolumes(Arrays.asList(dataVolumes.split(",")));
         }        
