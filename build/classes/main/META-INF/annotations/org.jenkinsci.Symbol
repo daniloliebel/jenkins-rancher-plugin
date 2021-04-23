@@ -1,0 +1,2 @@
+jenkins.plugins.rancher.RancherBuilder$DescriptorImpl
+jenkins.plugins.rancher.RancherUpgradeBuilder$DescriptorImpl

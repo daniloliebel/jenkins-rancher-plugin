@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Plugin-Dependencies: credentials:2.1.13,plain-credentials:1.4;resoluti
+ on:=optional
+Long-Name: Rancher Plugin
+Group-Id: org.jenkins-ci.plugins
+Plugin-Version: 1.0-DaniloLiebel
+Jenkins-Version: 2.11
+Url: https://wiki.jenkins.io/display/JENKINS/Rancher+Plugin
+PluginFirstClassLoader: true
+Short-Name: rancher
+Compatible-Since-Version: 1.1.0
+Plugin-Developers: daniloliebel:daniloliebel:daniloliebel@gmail.com
+Extension-Name: rancher
+Mask-Classes: groovy.grape org.apache.commons.codec
+
